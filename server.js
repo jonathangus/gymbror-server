@@ -25,6 +25,7 @@ var Exercise = require('./app/models/exercise');
 var router = express.Router();              // get an instance of the express Router
 var workoutRoute = require('./routes/workout')(router);
 var exerciseRoute = require('./routes/exercise')(router);
+var userRoute = require('./routes/user')(router);
 
 // middleware to use for all requests
 router.use(function(req, res, next) {

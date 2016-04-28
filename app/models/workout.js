@@ -1,6 +1,6 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
-var ExerciseUnit = require('./exercise_unit');
+var ExerciseSession = require('./exercise_unit');
 
 var WorkoutSchema  = new Schema({
   userId: '',
@@ -12,12 +12,20 @@ var WorkoutSchema  = new Schema({
 });
 
 WorkoutSchema.pre('remove', function(next) {
-  this.exerciseUnits.forEach(function(unit) {
-      ExerciseUnit.remove({
+  var unitsLength = this.exerciseUnits.length;
+  this.exerciseUnits.forEach(function(unit, index) {
+      ExerciseSession.remove({
         _id: unit
+      }, function(err, session) {
+        if(index + 1 == unitsLength) {
+          next();
+        }
       });
   });
-  next();
+  
+  if(unitsLength == 0) {
+    next();
+  }
 });
 
 module.exports = mongoose.model('Workout', WorkoutSchema);

@@ -7,7 +7,8 @@ var ExerciseSchema  = new Schema({
     sessions: [{
         type: Schema.Types.ObjectId,
         ref: 'ExerciseSession'
-    }]
+    }],
+    type: String
 });
 
 module.exports = mongoose.model('Exercise', ExerciseSchema);

@@ -9,22 +9,25 @@ module.exports = function(router) {
       Exercise
         .find({userId: req.params.user_id}, function(err, exercises) {
           // Map the docs into an array of just the _ids
-          var ids = exercises.map(function(ex) { return ex._id; });
-          ExerciseSession
-            .find({exercise: {$in: ids}})
-            .sort({date: -1})
-            .exec(function(err, sessions){
-            if(err) {
-              res.send(err);
-            }
-            exercises.forEach(function(ex) {
-              ex.sessions = sessions.filter(function(sess) {
-                return sess.exercise.toString() == ex._id.toString();
+          if (!exercises) {
+            res.json([]);
+          } else {
+            var ids = exercises.map(function(ex) { return ex._id; });
+            ExerciseSession
+              .find({exercise: {$in: ids}})
+              .sort({date: -1})
+              .exec(function(err, sessions){
+                if(err) {
+                  res.send(err);
+                }
+                exercises.forEach(function(ex) {
+                  ex.sessions = sessions.filter(function(sess) {
+                    return sess.exercise.toString() == ex._id.toString();
+                  });
+                });
+                res.json(exercises);
               });
-
-            });
-            res.json(exercises);
-          });
+          }
         });
     });
 
@@ -56,6 +59,7 @@ module.exports = function(router) {
 
       exercise.name = req.body.name;
       exercise.userId = req.body.userId;
+      exercise.type = req.body.type || 'weight';
 
       exercise.save(function(err) {
         if (err)
