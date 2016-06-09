@@ -4,7 +4,7 @@ var Schema       = mongoose.Schema;
 var ExerciseSchema  = new Schema({
     userId: Number,
     type: String,
-    exercise: String,
+    exerciseName: String,
     _brorId: String,
     sessions: []
 });
