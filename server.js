@@ -13,7 +13,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 9096;        // set our port
 
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://@localhost:27017/gymbror'); // connect to our database
