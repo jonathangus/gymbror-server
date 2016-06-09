@@ -25,7 +25,6 @@ WorkoutSchema.pre('remove', function(next) {
 WorkoutSchema.pre('save', function(next) {
   var sessionsLength = this.sessions.length;
   var self = this;
-  // console.log(this);
   this.sessions.forEach(function(s, index) {
     var newSession = new ExerciseSession({
       userId: s.userId,
