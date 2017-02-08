@@ -1,5 +1,5 @@
 var express = require('express');
-var Exercise = require('../app/models/exercise');
+var Exercise = require('../appz/models/exercise');
 var _ = require('lodash');
 
 module.exports = function(router) {

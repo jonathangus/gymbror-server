@@ -1,5 +1,5 @@
 var express = require('express');
-var Workout = require('../app/models/workout');
+var Workout = require('../appz/models/workout');
 
 module.exports = function(router) {
   router.route('/workouts/:user_id')

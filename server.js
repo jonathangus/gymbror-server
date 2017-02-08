@@ -13,12 +13,12 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 9096;        // set our port
-
+var port = process.env.PORT || 3000;        // set our port
+console.log('GETTING HERE')
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://@localhost:27017/gymbror'); // connect to our database
+mongoose.connect('mongodb://db:27017/gymbror'); // connect to our database
 
-var Exercise = require('./app/models/exercise');
+var Exercise = require('./appz/models/exercise');
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -51,4 +51,4 @@ app.use('/api/v1', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-// console.log('Magic happens on port ' + port);
+console.log('Magic happens on port ' + port);
